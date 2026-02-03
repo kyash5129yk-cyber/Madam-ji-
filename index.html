@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Question From My Heart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ====== Base ====== */
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+/* ====== Floating hearts ====== */
+.heart {
+    position: absolute;
+    color: rgba(255,255,255,0.6);
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* ====== Card ====== */
+.card {
+    background: #ffffff;
+    padding: 50px 60px;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 420px;
+    z-index: 2;
+}
+
+/* ====== Text ====== */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #b71c1c;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 35px;
+}
+
+/* ====== Buttons Layout (NO OVERLAP FIX) ====== */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    min-height: 120px; /* reserves space so scaling never overlaps */
+}
+
+button {
+    padding: 14px 34px;
+    border-radius: 999px;
+    border: 1px solid #b71c1c;
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+button:hover {
+    background: #b71c1c;
+    color: #fff;
+}
+
+/* YES button */
+#yesBtn {
+    transform-origin: center;
+}
+
+/* Message */
+#message {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #b71c1c;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+<script>
+for (let i = 0; i < 25; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (14 + Math.random() * 20) + "px";
+    heart.style.animationDuration = (6 + Math.random() * 6) + "s";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(heart);
+}
+</script>
+
+<div class="card">
+    <h1>Would you like to be my Valentine Taniya jii?</h1>
+    <p>No pressure. Just something I wanted to ask you honestly.</p>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="yes()">Yes</button>
+        <button onclick="no()">No</button>
+    </div>
+
+    <div id="message"></div>
+</div>
+
+<script>
+let scale = 1;
+
+function no() {
+    scale *= 1.5;
+    document.getElementById("yesBtn").style.transform =
+        `scale(${scale})`;
+
+    document.getElementById("message").innerText =
+        "Think again… 🤍";
+}
+
+function yes() {
+    document.querySelector(".card").innerHTML =
+        "<h1>You made my heart very happy 💖</h1><p>Thank you for saying yes.</p>";
+}
+</script>
+
+</body>
+</html>
